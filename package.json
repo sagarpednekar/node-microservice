@@ -1,0 +1,19 @@
+{
+  "name": "ms-poc",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Sagar Pednekar",
+  "license": "MIT",
+  "devDependencies":{
+    "nodemon":"^1.18.10"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "start:dev":"nodemon server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.23"
+  }
+}
