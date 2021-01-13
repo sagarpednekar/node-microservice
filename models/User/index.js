@@ -10,6 +10,7 @@ const userObject = {
   email: {
     type: String,
     required: true,
+    unique:true
   },
   mobile: {
     type: String,
@@ -27,6 +28,9 @@ const UserSchemaV2 = new Schema({
     ref: "Address",
   },
 });
+
+UserSchemaV1.index({email:1},{uniq:true})
+
 
 module.exports = {
   UserV1: model("UserV1", UserSchemaV1),

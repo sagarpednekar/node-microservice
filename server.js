@@ -160,6 +160,57 @@ app.get("/v2/users", async (req, res) => {
 });
 
 /**
+ * 
+ * Using create
+ * 
+ * 
+ * 
+ * 
+ * 
+
+ let bulkUserPromise = new Array(50).fill(UserV1.create({email:"sagar@gmail.com"}),0,50)
+
+Promise.all(bulkUserPromise)
+.then(users => {
+  console.log("Users",users)
+})
+.catch(err =>{
+  console.log("err while creating user",err)
+})
+
+ */
+
+
+let bulkUserPromise = new Array(50).fill(0)
+
+
+bulkUserPromise = bulkUserPromise.map(user =>{
+  let document = new UserV1({email:"sagar@gmail.com"})
+  return document.save()
+   
+})
+
+let document = new UserV1({email:"sagar@gmail.com"})
+
+bulkUserPromise.push(document.save())
+
+bulkUserPromise = bulkUserPromise.filter(p=> p.then(res => res)) 
+
+
+Promise.all(bulkUserPromise.map(p=> p.catch((err)=> 
+{ return {err:err, status: "failed"}})))
+.then(users => {
+  console.log("Users",users)
+})
+.catch(err =>{
+  console.log("err while creating user")
+})
+
+
+
+
+
+/**
  * Fallback route
  *
  */
